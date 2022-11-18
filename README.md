@@ -12,3 +12,4 @@ Check Your Understanding:
 - 4: Yes, we would use a unit test to test the 'max message length' feature of an application. This being is this is a clearly defined chunk, or unit, of the program. And we can easily test both the positive and negative cases for this feature. We can test what happens if the message is above or below the max message length and see if that is functioning properly. Also, since this more a modular unit, we can easily debug and change this functionality in particular, without it affecting too much of the entire application. 
 
 
+![Screenshot of all tests](testRunScreenShot.png)
