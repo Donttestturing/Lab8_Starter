@@ -7,8 +7,8 @@ Check Your Understanding:
 
 - 2: No. You would use a unit test to check if a function is returning the correct output. End to end testing is used to simulate an end user, so you would use it to test the overall application and the overall functionality of the app.
 
-- 3: 
+- 3: No, we would not use a unit test to test this message functionality. The reason is because the message feature is a user writing and sending a message to to another user, testing it would need to use or account for user activity and behavior. This means end to end testing would be a better option to test this feature. This situation is much more about how the overall app works, and how the components interact with each other, so unit testing would be a poor choice. The entire application would effectively be what you are testing in this case, so you need E2E testing for that.
 
-- 4:
+- 4: Yes, we would use a unit test to test the 'max message length' feature of an application. This being is this is a clearly defined chunk, or unit, of the program. And we can easily test both the positive and negative cases for this feature. We can test what happens if the message is above or below the max message length and see if that is functioning properly. Also, since this more a modular unit, we can easily debug and change this functionality in particular, without it affecting too much of the entire application. 
 
 
