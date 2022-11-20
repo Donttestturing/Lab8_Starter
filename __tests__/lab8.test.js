@@ -106,11 +106,11 @@ describe('Basic user flow for Website', () => {
     console.log('Checking number of items in cart on screen after reload...');
     // TODO - Step 4
     // Reload the page, then select all of the <product-item> elements, and check every
-    page.reload();
-    await page.goto('https://cse110-f2021.github.io/Lab8_Website');
+    await page.reload();    //need await for page reload - remember await for many things!
+ 
     const prodItems = await page.$$('product-item');  //get all elements
     // element to make sure that all of their buttons say "Remove from Cart".
-    for (let i = 1; i < prodItems.length; i++) {
+    for (let i = 0; i < prodItems.length; i++) {
       const sRootOfProdItem = await prodItems[i].getProperty('shadowRoot')
       const elButton = await sRootOfProdItem.$('button'); 
       const buttonText = await elButton.getProperty('innerText');     
@@ -118,6 +118,11 @@ describe('Basic user flow for Website', () => {
       expect(buttonTextVal).toBe("Remove from Cart");
     }
     // Also check to make sure that #cart-count is still 20
+    const cartCount = await page.$('#cart-count');
+
+    const cartCountText = await cartCount.getProperty('innerText');  
+    const cartCountVal = await cartCountText.jsonValue()
+    expect(cartCountVal).toBe("20");
   }, 10000);
 
   // Check to make sure that the cart in localStorage is what you expect
@@ -126,7 +131,7 @@ describe('Basic user flow for Website', () => {
     // At this point he item 'cart' in localStorage should be 
     // '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]', check to make sure it is
     const lStorage = await page.evaluate(() => Object.assign({}, window.localStorage));
-    const cartStorage = await lStorage['cart']
+    const cartStorage = lStorage['cart']
     expect(cartStorage).toBe('[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]');
 
 
@@ -165,8 +170,7 @@ describe('Basic user flow for Website', () => {
     // Reload the page once more, then go through each <product-item> to make sure that it has remembered nothing
     // is in the cart - do this by checking the text on the buttons so that they should say "Add to Cart".
     // Also check to make sure that #cart-count is still 0
-    page.reload();
-    await page.goto('https://cse110-f2021.github.io/Lab8_Website');
+    await page.reload();
 
     const prodItems = await page.$$('product-item');  //get all elements
 
@@ -193,7 +197,7 @@ describe('Basic user flow for Website', () => {
     // TODO - Step 8
     // At this point he item 'cart' in localStorage should be '[]', check to make sure it is
     const lStorage = await page.evaluate(() => Object.assign({}, window.localStorage));
-    const cartStorage = await lStorage['cart']
+    const cartStorage = lStorage['cart']
     expect(cartStorage).toBe("[]");
   });
 });
